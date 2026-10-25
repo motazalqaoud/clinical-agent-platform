@@ -1,0 +1,942 @@
+{
+ "resourceType": "Bundle",
+ "type": "transaction",
+ "entry": [
+  {
+   "resource": {
+    "resourceType": "Patient",
+    "id": "pt-001",
+    "identifier": [
+     {
+      "system": "urn:synthetic:mrn",
+      "value": "SYN-0001"
+     }
+    ],
+    "name": [
+     {
+      "family": "Synthetic",
+      "given": [
+       "Alpha"
+      ]
+     }
+    ],
+    "gender": "female",
+    "birthDate": "1968-03-14",
+    "telecom": [
+     {
+      "system": "phone",
+      "value": "612-555-0101"
+     }
+    ]
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Patient/pt-001"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Condition",
+    "id": "cond-001",
+    "subject": {
+     "reference": "Patient/pt-001"
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "code": "active"
+      }
+     ]
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "233604007",
+       "display": "Pneumonia"
+      }
+     ],
+     "text": "Pneumonia"
+    },
+    "onsetDateTime": "2026-10-21"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Condition/cond-001"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "AllergyIntolerance",
+    "id": "al-001",
+    "patient": {
+     "reference": "Patient/pt-001"
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "code": "active"
+      }
+     ]
+    },
+    "criticality": "high",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "764146007",
+       "display": "Penicillin"
+      }
+     ],
+     "text": "Penicillin"
+    },
+    "reaction": [
+     {
+      "manifestation": [
+       {
+        "coding": [
+         {
+          "system": "http://snomed.info/sct",
+          "code": "39579001",
+          "display": "Anaphylaxis"
+         }
+        ],
+        "text": "Anaphylaxis"
+       }
+      ]
+     }
+    ]
+   },
+   "request": {
+    "method": "PUT",
+    "url": "AllergyIntolerance/al-001"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-001",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-001"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "8310-5",
+       "display": "Body temperature"
+      }
+     ],
+     "text": "Body temperature"
+    },
+    "valueQuantity": {
+     "value": 38.4,
+     "unit": "Cel",
+     "system": "http://unitsofmeasure.org",
+     "code": "Cel"
+    },
+    "effectiveDateTime": "2026-10-22T08:10:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-001"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-002",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-001"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "59408-5",
+       "display": "Oxygen saturation by pulse oximetry"
+      }
+     ],
+     "text": "Oxygen saturation by pulse oximetry"
+    },
+    "valueQuantity": {
+     "value": 93,
+     "unit": "%",
+     "system": "http://unitsofmeasure.org",
+     "code": "%"
+    },
+    "effectiveDateTime": "2026-10-22T08:10:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-002"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-003",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-001"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "9279-1",
+       "display": "Respiratory rate"
+      }
+     ],
+     "text": "Respiratory rate"
+    },
+    "valueQuantity": {
+     "value": 24,
+     "unit": "/min",
+     "system": "http://unitsofmeasure.org",
+     "code": "/min"
+    },
+    "effectiveDateTime": "2026-10-22T08:10:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-003"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-004",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-001"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "29463-7",
+       "display": "Body weight"
+      }
+     ],
+     "text": "Body weight"
+    },
+    "valueQuantity": {
+     "value": 72,
+     "unit": "kg",
+     "system": "http://unitsofmeasure.org",
+     "code": "kg"
+    },
+    "effectiveDateTime": "2026-10-22T08:10:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-004"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Patient",
+    "id": "pt-002",
+    "identifier": [
+     {
+      "system": "urn:synthetic:mrn",
+      "value": "SYN-0002"
+     }
+    ],
+    "name": [
+     {
+      "family": "Synthetic",
+      "given": [
+       "Bravo"
+      ]
+     }
+    ],
+    "gender": "male",
+    "birthDate": "1992-07-02",
+    "telecom": [
+     {
+      "system": "phone",
+      "value": "612-555-0102"
+     }
+    ]
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Patient/pt-002"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Condition",
+    "id": "cond-002",
+    "subject": {
+     "reference": "Patient/pt-002"
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "code": "active"
+      }
+     ]
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "195967001",
+       "display": "Asthma"
+      }
+     ],
+     "text": "Asthma"
+    },
+    "onsetDateTime": "2009-05-01"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Condition/cond-002"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "MedicationRequest",
+    "id": "med-001",
+    "status": "active",
+    "intent": "order",
+    "subject": {
+     "reference": "Patient/pt-002"
+    },
+    "medicationCodeableConcept": {
+     "coding": [
+      {
+       "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+       "code": "435",
+       "display": "Albuterol"
+      }
+     ],
+     "text": "Albuterol"
+    },
+    "dosageInstruction": [
+     {
+      "text": "2 puffs inhaled every 4 hours PRN"
+     }
+    ],
+    "authoredOn": "2026-01-10"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "MedicationRequest/med-001"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "MedicationRequest",
+    "id": "med-002",
+    "status": "active",
+    "intent": "order",
+    "subject": {
+     "reference": "Patient/pt-002"
+    },
+    "medicationCodeableConcept": {
+     "coding": [
+      {
+       "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+       "code": "41126",
+       "display": "Fluticasone"
+      }
+     ],
+     "text": "Fluticasone"
+    },
+    "dosageInstruction": [
+     {
+      "text": "250 mcg inhaled BID"
+     }
+    ],
+    "authoredOn": "2026-01-10"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "MedicationRequest/med-002"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-010",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-002"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "59408-5",
+       "display": "Oxygen saturation by pulse oximetry"
+      }
+     ],
+     "text": "Oxygen saturation by pulse oximetry"
+    },
+    "valueQuantity": {
+     "value": 91,
+     "unit": "%",
+     "system": "http://unitsofmeasure.org",
+     "code": "%"
+    },
+    "effectiveDateTime": "2026-10-23T14:02:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-010"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-011",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-002"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "9279-1",
+       "display": "Respiratory rate"
+      }
+     ],
+     "text": "Respiratory rate"
+    },
+    "valueQuantity": {
+     "value": 28,
+     "unit": "/min",
+     "system": "http://unitsofmeasure.org",
+     "code": "/min"
+    },
+    "effectiveDateTime": "2026-10-23T14:02:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-011"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Patient",
+    "id": "pt-003",
+    "identifier": [
+     {
+      "system": "urn:synthetic:mrn",
+      "value": "SYN-0003"
+     }
+    ],
+    "name": [
+     {
+      "family": "Synthetic",
+      "given": [
+       "Charlie"
+      ]
+     }
+    ],
+    "gender": "male",
+    "birthDate": "1955-11-30",
+    "telecom": [
+     {
+      "system": "phone",
+      "value": "612-555-0103"
+     }
+    ]
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Patient/pt-003"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Condition",
+    "id": "cond-003",
+    "subject": {
+     "reference": "Patient/pt-003"
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "code": "active"
+      }
+     ]
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "433144002",
+       "display": "Chronic kidney disease stage 3"
+      }
+     ],
+     "text": "Chronic kidney disease stage 3"
+    },
+    "onsetDateTime": "2021-02-01"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Condition/cond-003"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Condition",
+    "id": "cond-004",
+    "subject": {
+     "reference": "Patient/pt-003"
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "code": "active"
+      }
+     ]
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "14669001",
+       "display": "Acute renal failure syndrome"
+      }
+     ],
+     "text": "Acute renal failure syndrome"
+    },
+    "onsetDateTime": "2026-10-20"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Condition/cond-004"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "MedicationRequest",
+    "id": "med-003",
+    "status": "active",
+    "intent": "order",
+    "subject": {
+     "reference": "Patient/pt-003"
+    },
+    "medicationCodeableConcept": {
+     "coding": [
+      {
+       "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+       "code": "7454",
+       "display": "Nitrofurantoin"
+      }
+     ],
+     "text": "Nitrofurantoin"
+    },
+    "dosageInstruction": [
+     {
+      "text": "100 mg orally BID"
+     }
+    ],
+    "authoredOn": "2026-10-15"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "MedicationRequest/med-003"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "MedicationRequest",
+    "id": "med-004",
+    "status": "active",
+    "intent": "order",
+    "subject": {
+     "reference": "Patient/pt-003"
+    },
+    "medicationCodeableConcept": {
+     "coding": [
+      {
+       "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+       "code": "5640",
+       "display": "Ibuprofen"
+      }
+     ],
+     "text": "Ibuprofen"
+    },
+    "dosageInstruction": [
+     {
+      "text": "400 mg orally TID PRN"
+     }
+    ],
+    "authoredOn": "2026-09-01"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "MedicationRequest/med-004"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-020",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-003"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "2160-0",
+       "display": "Creatinine [Mass/volume] in Serum or Plasma"
+      }
+     ],
+     "text": "Creatinine [Mass/volume] in Serum or Plasma"
+    },
+    "valueQuantity": {
+     "value": 110,
+     "unit": "umol/L",
+     "system": "http://unitsofmeasure.org",
+     "code": "umol/L"
+    },
+    "effectiveDateTime": "2026-09-28T09:00:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-020"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-021",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-003"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "2160-0",
+       "display": "Creatinine [Mass/volume] in Serum or Plasma"
+      }
+     ],
+     "text": "Creatinine [Mass/volume] in Serum or Plasma"
+    },
+    "valueQuantity": {
+     "value": 190,
+     "unit": "umol/L",
+     "system": "http://unitsofmeasure.org",
+     "code": "umol/L"
+    },
+    "effectiveDateTime": "2026-10-22T09:00:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-021"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-022",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-003"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "33914-3",
+       "display": "Glomerular filtration rate (eGFR)"
+      }
+     ],
+     "text": "Glomerular filtration rate (eGFR)"
+    },
+    "valueQuantity": {
+     "value": 28,
+     "unit": "mL/min/1.73m2",
+     "system": "http://unitsofmeasure.org",
+     "code": "mL/min/1.73m2"
+    },
+    "effectiveDateTime": "2026-10-22T09:00:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-022"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-023",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-003"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "2823-3",
+       "display": "Potassium [Moles/volume] in Serum or Plasma"
+      }
+     ],
+     "text": "Potassium [Moles/volume] in Serum or Plasma"
+    },
+    "valueQuantity": {
+     "value": 5.6,
+     "unit": "mmol/L",
+     "system": "http://unitsofmeasure.org",
+     "code": "mmol/L"
+    },
+    "effectiveDateTime": "2026-10-22T09:00:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-023"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Patient",
+    "id": "pt-004",
+    "identifier": [
+     {
+      "system": "urn:synthetic:mrn",
+      "value": "SYN-0004"
+     }
+    ],
+    "name": [
+     {
+      "family": "Synthetic",
+      "given": [
+       "Delta"
+      ]
+     }
+    ],
+    "gender": "female",
+    "birthDate": "1981-04-19",
+    "telecom": [
+     {
+      "system": "phone",
+      "value": "612-555-0104"
+     }
+    ]
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Patient/pt-004"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Condition",
+    "id": "cond-005",
+    "subject": {
+     "reference": "Patient/pt-004"
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "code": "active"
+      }
+     ]
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "239873007",
+       "display": "Osteoarthritis of knee"
+      }
+     ],
+     "text": "Osteoarthritis of knee"
+    },
+    "onsetDateTime": "2019-06-12"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Condition/cond-005"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "AllergyIntolerance",
+    "id": "al-002",
+    "patient": {
+     "reference": "Patient/pt-004"
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "code": "active"
+      }
+     ]
+    },
+    "criticality": "low",
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "764146007",
+       "display": "Penicillin"
+      }
+     ],
+     "text": "Penicillin"
+    },
+    "reaction": [
+     {
+      "manifestation": [
+       {
+        "coding": [
+         {
+          "system": "http://snomed.info/sct",
+          "code": "271807003",
+          "display": "Eruption of skin"
+         }
+        ],
+        "text": "Eruption of skin"
+       }
+      ]
+     }
+    ]
+   },
+   "request": {
+    "method": "PUT",
+    "url": "AllergyIntolerance/al-002"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Observation",
+    "id": "obs-030",
+    "status": "final",
+    "subject": {
+     "reference": "Patient/pt-004"
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "29463-7",
+       "display": "Body weight"
+      }
+     ],
+     "text": "Body weight"
+    },
+    "valueQuantity": {
+     "value": 128,
+     "unit": "kg",
+     "system": "http://unitsofmeasure.org",
+     "code": "kg"
+    },
+    "effectiveDateTime": "2026-10-19T11:30:00Z"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Observation/obs-030"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Patient",
+    "id": "pt-005",
+    "identifier": [
+     {
+      "system": "urn:synthetic:mrn",
+      "value": "SYN-0005"
+     }
+    ],
+    "name": [
+     {
+      "family": "Synthetic",
+      "given": [
+       "Echo"
+      ]
+     }
+    ],
+    "gender": "female",
+    "birthDate": "1997-09-08",
+    "telecom": [
+     {
+      "system": "phone",
+      "value": "612-555-0105"
+     }
+    ]
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Patient/pt-005"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "Condition",
+    "id": "cond-006",
+    "subject": {
+     "reference": "Patient/pt-005"
+    },
+    "clinicalStatus": {
+     "coding": [
+      {
+       "code": "active"
+      }
+     ]
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "37796009",
+       "display": "Migraine"
+      }
+     ],
+     "text": "Migraine"
+    },
+    "onsetDateTime": "2015-03-03"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "Condition/cond-006"
+   }
+  },
+  {
+   "resource": {
+    "resourceType": "MedicationRequest",
+    "id": "med-005",
+    "status": "active",
+    "intent": "order",
+    "subject": {
+     "reference": "Patient/pt-005"
+    },
+    "medicationCodeableConcept": {
+     "coding": [
+      {
+       "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+       "code": "37418",
+       "display": "Sumatriptan"
+      }
+     ],
+     "text": "Sumatriptan"
+    },
+    "dosageInstruction": [
+     {
+      "text": "50 mg orally PRN"
+     }
+    ],
+    "authoredOn": "2025-12-01"
+   },
+   "request": {
+    "method": "PUT",
+    "url": "MedicationRequest/med-005"
+   }
+  }
+ ]
+}
