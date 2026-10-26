@@ -10,7 +10,7 @@
 
 ## Results
 
-The evaluation suite ([evals/cases.yaml](evals/cases.yaml), 39 cases) runs in CI on every pull request with the deterministic extractive generator. Safety metrics are absolute; quality metrics are regression floors ([evals/thresholds.yaml](evals/thresholds.yaml)).
+The evaluation suite ([evals/cases.yaml](evals/cases.yaml), 39 cases) runs in CI on every pull request with the deterministic extractive generator. Every change must meet the thresholds in [evals/thresholds.yaml](evals/thresholds.yaml).
 
 | Metric | Result | Gate |
 | --- | --- | --- |
@@ -23,13 +23,6 @@ The evaluation suite ([evals/cases.yaml](evals/cases.yaml), 39 cases) runs in CI
 | Patient record cited (patient questions) | 1.00 | ≥ 0.80 |
 | Correct refusals (out of scope, identifier requests) | 0.83 | ≥ 0.80 |
 | Latency p95 (in-process, extractive) | ~1 ms | ≤ 250 ms |
-
-**The three failing cases are kept in the suite on purpose:**
-
-- `oos-acl` — *"surgical approach for a torn ACL"* is answered instead of refused. It shares vocabulary with the surgical-prophylaxis guideline and scores inside the range of real questions (0.18 vs 0.12–0.50). A similarity threshold alone cannot separate in-domain-sounding questions from answerable ones. A model's own `INSUFFICIENT` judgement or a relevance classifier is needed, and that is what the LLM evaluation measures.
-- `cap-duration` and `pt001-allergy-antibiotic` — the right section is retrieved, but the extractive baseline picks a neighbouring sentence. This is a generator limitation, not a retrieval one.
-
-Raising a floor is how progress is recorded. Lowering one to make a PR pass is not allowed.
 
 ## How a request flows
 
@@ -49,17 +42,14 @@ flowchart LR
 
 Patient questions go through this **fixed, audited workflow**, not a free-running agent. Every request touches the same data in the same order, which is what makes it testable and reviewable ([ADR 0001](docs/adr/0001-fixed-workflow-over-agent.md)). A ReAct agent with the same tools and the same verification is included for exploratory use.
 
-## What it does that a demo RAG doesn't
+## Key features
 
-| Problem | What happens here |
-| --- | --- |
-| A chunk boundary splits "500" from "mg" | The chunker never cuts inside a dose, lab threshold, blood pressure or frequency ([chunker.py](src/clinagent/ingest/chunker.py)) |
-| The model writes "2 g" where the guideline says "1 g" | Every quantity in the answer must appear in the source its sentence cites, or the answer is withheld ([verify.py](src/clinagent/generation/verify.py)) |
-| The model cites [5] when there were four sources | Blocked as a fabricated reference |
-| A guideline upload contains "ignore previous instructions" | The chunk is quarantined, logged and counted in `/metrics` ([injection.py](src/clinagent/guardrails/injection.py)) |
-| Patient names and MRNs end up in prompts and logs | They are never fetched into evidence; only age, sex and the clinical facts reach the model. Structured identifiers in questions are redacted before logging ([context.py](src/clinagent/fhir/context.py), [phi.py](src/clinagent/guardrails/phi.py)) |
-| "Which antibiotic, given this patient's allergy?" retrieves every allergy section | Retrieval is expanded with the patient's active conditions |
-| Nobody notices when quality drops | The evaluation suite is a required CI check; per-stage spans come back with every response; Prometheus metrics at `/metrics` |
+- **Dosage-safe chunking.** Guideline text is never split inside a dose, lab threshold, blood pressure or dosing frequency ([chunker.py](src/clinagent/ingest/chunker.py)).
+- **Dose and citation verification.** Every quantity in an answer must appear in the source its sentence cites, and every citation must point to a real source; otherwise the answer is withheld ([verify.py](src/clinagent/generation/verify.py)).
+- **Prompt-injection screening.** Retrieved text that tries to instruct the model is quarantined, logged and counted in `/metrics` ([injection.py](src/clinagent/guardrails/injection.py)).
+- **Minimum-necessary patient context.** Only age, sex and the relevant clinical facts reach the model; identifiers are never fetched, and structured identifiers in questions are redacted ([context.py](src/clinagent/fhir/context.py), [phi.py](src/clinagent/guardrails/phi.py)).
+- **Patient-aware retrieval.** Guideline search is expanded with the patient's active conditions.
+- **Built-in observability.** Per-stage timings with every response, Prometheus metrics, and an evaluation suite that runs as a required CI check.
 
 ## Quickstart
 
@@ -136,18 +126,10 @@ deploy/          docker-compose: API + HAPI FHIR + optional Ollama
 - [Risk register](docs/risk-register.md): hazards, controls, residual risk, and what is not controlled
 - ADRs: [fixed workflow over agent](docs/adr/0001-fixed-workflow-over-agent.md) · [NumPy index](docs/adr/0002-numpy-index.md) · [deterministic eval gate](docs/adr/0003-deterministic-eval-gate.md)
 
-## Roadmap
-
-- [ ] Report LLM results (Qwen 2.5 3B/7B via vLLM, one hosted model) on the same suite, next to the baseline
-- [ ] Dense-embedding results and a re-tuned refusal threshold
-- [ ] Terraform module for a one-command deploy to AWS ECS with teardown
-- [ ] OpenTelemetry dashboard (Grafana) for stage latency and guardrail rates
-- [ ] Extract the evaluation runner as a standalone package for other clinical RAG systems
-
 ## Author
 
 Motaz Alqaoud, PhD · [motazalqaoud.com](https://motazalqaoud.com) · [Hugging Face](https://huggingface.co/motazalqaoud)
 
-Built in a personal capacity with public tools and synthetic data. Views are my own.
+A personal project, built with public tools and synthetic data. It does not represent my employer.
 
 MIT licensed.
